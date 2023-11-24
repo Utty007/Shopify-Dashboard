@@ -81,7 +81,7 @@ const btnToToggleOne = document.getElementById("setup-sect-btn-one");
 const toggleCompOne = document.getElementById("setup-sect-one");
 const setupOne = document.getElementById("setupOne");
 
-toggleCompOne.addEventListener("click", () => {
+const handleSetupOneToggle = () => {
   imageToToggleOne.classList.toggle("hidden");
   textToToggleOne.classList.toggle("hidden");
   btnToToggleOne.classList.toggle("hidden");
@@ -108,14 +108,25 @@ toggleCompOne.addEventListener("click", () => {
   textToToggleFive.classList.add("hidden");
   btnToToggleFive.classList.add("hidden");
   setupFive.classList.remove("setup-p-bg");
+};
+toggleCompOne.addEventListener("click", () => {
+  handleSetupOneToggle();
+});
+
+setupOne.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    handleSetupOneToggle();
+  }
 });
 
 //Load and marked toggle one
 const circleOne = document.getElementById("setup-sect-circle-one");
+const circleFocOne = document.getElementById("circleOne");
 const loadingOne = document.getElementById("setup-sect-load-one");
 const markOne = document.getElementById("setup-sect-mark-one");
 
-circleOne.addEventListener("click", () => {
+let mark1 = false;
+const loadMarkOneToggle = () => {
   circleOne.classList.add("hidden");
   loadingOne.classList.remove("hidden");
   setTimeout(() => {
@@ -125,6 +136,25 @@ circleOne.addEventListener("click", () => {
     setupCounter.innerText = i;
     // i = setupCounter.innerText;
   }, 500);
+  mark1 = true;
+};
+
+circleOne.addEventListener("click", () => {
+  loadMarkOneToggle();
+});
+
+circleFocOne.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    if (!mark1) {
+      loadMarkOneToggle();
+    } else {
+      markOne.classList.add("hidden");
+      circleOne.classList.remove("hidden");
+      i = i - 1;
+      setupCounter.innerText = i;
+      mark1 = false;
+    }
+  }
 });
 
 markOne.addEventListener("click", () => {
@@ -132,6 +162,7 @@ markOne.addEventListener("click", () => {
   circleOne.classList.remove("hidden");
   i = i - 1;
   setupCounter.innerText = i;
+  mark1 = false;
   //   i = setupCounter.innerText;
 });
 
@@ -143,18 +174,16 @@ const btnToToggleSix = document.getElementById("setup-sect-btn-six");
 const toggleCompTwo = document.getElementById("setup-sect-two");
 const setupTwo = document.getElementById("setupTwo");
 
-toggleCompTwo.addEventListener("click", () => {
+const handleSetupTwoToggle = () => {
   imageToToggleTwo.classList.toggle("hidden");
   textToToggleTwo.classList.toggle("hidden");
   btnToToggleTwo.classList.toggle("hidden");
   btnToToggleSix.classList.toggle("hidden");
-  // toggleCompTwo.classList.add("setup-p-bg");
   setupTwo.classList.toggle("setup-p-bg");
 
   imageToToggleOne.classList.add("hidden");
   textToToggleOne.classList.add("hidden");
   btnToToggleOne.classList.add("hidden");
-  // toggleCompOne.classList.remove("setup-p-bg");
   setupOne.classList.remove("setup-p-bg");
 
   imageToToggleThree.classList.add("hidden");
@@ -171,12 +200,24 @@ toggleCompTwo.addEventListener("click", () => {
   textToToggleFive.classList.add("hidden");
   btnToToggleFive.classList.add("hidden");
   setupFive.classList.remove("setup-p-bg");
+};
+
+toggleCompTwo.addEventListener("click", () => {
+  handleSetupTwoToggle();
+});
+
+setupTwo.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    handleSetupTwoToggle();
+  }
 });
 
 //Load and marked toggle two
 const circleTwo = document.getElementById("setup-sect-circle-two");
+const circleFocTwo = document.getElementById("circleTwo");
 const loadingTwo = document.getElementById("setup-sect-load-two");
 const markTwo = document.getElementById("setup-sect-mark-two");
+let mark2 = false;
 
 circleTwo.addEventListener("click", () => {
   circleTwo.classList.add("hidden");
@@ -187,6 +228,29 @@ circleTwo.addEventListener("click", () => {
     i = i + 1;
     setupCounter.innerText = i;
   }, 500);
+  mark2 = true;
+});
+
+circleFocTwo.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    if (!mark2) {
+      circleTwo.classList.add("hidden");
+      loadingTwo.classList.remove("hidden");
+      setTimeout(() => {
+        loadingTwo.classList.add("hidden");
+        markTwo.classList.remove("hidden");
+        i = i + 1;
+        setupCounter.innerText = i;
+      }, 500);
+      mark2 = true;
+    } else {
+      markTwo.classList.add("hidden");
+      circleTwo.classList.remove("hidden");
+      i = i - 1;
+      setupCounter.innerText = i;
+      mark2 = false;
+    }
+  }
 });
 
 markTwo.addEventListener("click", () => {
@@ -194,6 +258,7 @@ markTwo.addEventListener("click", () => {
   circleTwo.classList.remove("hidden");
   i = i - 1;
   setupCounter.innerText = i;
+  mark2 = false;
 });
 
 // For Add a custom domain
@@ -203,7 +268,7 @@ const btnToToggleThree = document.getElementById("setup-sect-btn-three");
 const toggleCompThree = document.getElementById("setup-sect-three");
 const setupThree = document.getElementById("setupThree");
 
-toggleCompThree.addEventListener("click", () => {
+const handleSetupThreeToggle = () => {
   imageToToggleThree.classList.toggle("hidden");
   textToToggleThree.classList.toggle("hidden");
   btnToToggleThree.classList.toggle("hidden");
@@ -230,12 +295,24 @@ toggleCompThree.addEventListener("click", () => {
   textToToggleFive.classList.add("hidden");
   btnToToggleFive.classList.add("hidden");
   setupFive.classList.remove("setup-p-bg");
+};
+
+toggleCompThree.addEventListener("click", () => {
+  handleSetupThreeToggle();
+});
+
+setupThree.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    handleSetupThreeToggle();
+  }
 });
 
 //Load and marked toggle three
 const circleThree = document.getElementById("setup-sect-circle-three");
+const circleFocThree = document.getElementById("circleThree");
 const loadingThree = document.getElementById("setup-sect-load-three");
 const markThree = document.getElementById("setup-sect-mark-three");
+let mark3 = false;
 
 circleThree.addEventListener("click", () => {
   circleThree.classList.add("hidden");
@@ -246,6 +323,29 @@ circleThree.addEventListener("click", () => {
     i = i + 1;
     setupCounter.innerText = i;
   }, 500);
+  mark3 = true;
+});
+
+circleFocThree.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    if (!mark3) {
+      circleThree.classList.add("hidden");
+      loadingThree.classList.remove("hidden");
+      setTimeout(() => {
+        loadingThree.classList.add("hidden");
+        markThree.classList.remove("hidden");
+        i = i + 1;
+        setupCounter.innerText = i;
+      }, 500);
+      mark3 = true;
+    } else {
+      markThree.classList.add("hidden");
+      circleThree.classList.remove("hidden");
+      i = i - 1;
+      setupCounter.innerText = i;
+      mark3 = false;
+    }
+  }
 });
 
 markThree.addEventListener("click", () => {
@@ -253,6 +353,7 @@ markThree.addEventListener("click", () => {
   circleThree.classList.remove("hidden");
   i = i - 1;
   setupCounter.innerText = i;
+  mark3 = false;
 });
 
 // For Name your store
@@ -262,7 +363,7 @@ const btnToToggleFour = document.getElementById("setup-sect-btn-four");
 const toggleCompFour = document.getElementById("setup-sect-four");
 const setupFour = document.getElementById("setupFour");
 
-toggleCompFour.addEventListener("click", () => {
+const handleSetupFourToggle = () => {
   imageToToggleFour.classList.toggle("hidden");
   textToToggleFour.classList.toggle("hidden");
   btnToToggleFour.classList.toggle("hidden");
@@ -289,12 +390,24 @@ toggleCompFour.addEventListener("click", () => {
   textToToggleFive.classList.add("hidden");
   btnToToggleFive.classList.add("hidden");
   setupFive.classList.remove("setup-p-bg");
+};
+
+toggleCompFour.addEventListener("click", () => {
+  handleSetupFourToggle();
+});
+
+setupFour.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    handleSetupFourToggle();
+  }
 });
 
 //Load and marked toggle four
 const circleFour = document.getElementById("setup-sect-circle-four");
+const circleFocFour = document.getElementById("circleFour");
 const loadingFour = document.getElementById("setup-sect-load-four");
 const markFour = document.getElementById("setup-sect-mark-four");
+let mark4 = false;
 
 circleFour.addEventListener("click", () => {
   circleFour.classList.add("hidden");
@@ -305,6 +418,29 @@ circleFour.addEventListener("click", () => {
     i = i + 1;
     setupCounter.innerText = i;
   }, 500);
+  mark4 = true;
+});
+
+circleFocFour.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    if (!mark4) {
+      circleFour.classList.add("hidden");
+      loadingFour.classList.remove("hidden");
+      setTimeout(() => {
+        loadingFour.classList.add("hidden");
+        markFour.classList.remove("hidden");
+        i = i + 1;
+        setupCounter.innerText = i;
+      }, 500);
+      mark4 = true;
+    } else {
+      markFour.classList.add("hidden");
+      circleFour.classList.remove("hidden");
+      i = i - 1;
+      setupCounter.innerText = i;
+      mark4 = false;
+    }
+  }
 });
 
 markFour.addEventListener("click", () => {
@@ -321,7 +457,7 @@ const btnToToggleFive = document.getElementById("setup-sect-btn-five");
 const toggleCompFive = document.getElementById("setup-sect-five");
 const setupFive = document.getElementById("setupFive");
 
-toggleCompFive.addEventListener("click", () => {
+const handleSetupFiveToggle = () => {
   imageToToggleFive.classList.toggle("hidden");
   textToToggleFive.classList.toggle("hidden");
   btnToToggleFive.classList.toggle("hidden");
@@ -348,12 +484,24 @@ toggleCompFive.addEventListener("click", () => {
   btnToToggleOne.classList.add("hidden");
   // toggleCompOne.classList.remove("setup-p-bg");
   setupOne.classList.remove("setup-p-bg");
+};
+
+toggleCompFive.addEventListener("click", () => {
+  handleSetupFiveToggle();
+});
+
+setupFive.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    handleSetupFiveToggle();
+  }
 });
 
 //Load and marked toggle two
 const circleFive = document.getElementById("setup-sect-circle-five");
+const circleFocFive = document.getElementById("circleFive");
 const loadingFive = document.getElementById("setup-sect-load-five");
 const markFive = document.getElementById("setup-sect-mark-five");
+let mark5 = false;
 
 circleFive.addEventListener("click", () => {
   circleFive.classList.add("hidden");
@@ -364,6 +512,29 @@ circleFive.addEventListener("click", () => {
     i = i + 1;
     setupCounter.innerText = i;
   }, 500);
+  mark5 = true;
+});
+
+circleFocFive.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    if (!mark5) {
+      circleFive.classList.add("hidden");
+      loadingFive.classList.remove("hidden");
+      setTimeout(() => {
+        loadingFive.classList.add("hidden");
+        markFive.classList.remove("hidden");
+        i = i + 1;
+        setupCounter.innerText = i;
+      }, 500);
+      mark5 = true;
+    } else {
+      markFive.classList.add("hidden");
+      circleFive.classList.remove("hidden");
+      i = i - 1;
+      setupCounter.innerText = i;
+      mark5 = false;
+    }
+  }
 });
 
 markFive.addEventListener("click", () => {
@@ -371,6 +542,7 @@ markFive.addEventListener("click", () => {
   circleFive.classList.remove("hidden");
   i = i - 1;
   setupCounter.innerText = i;
+  mark5 = false;
 });
 
 //Toggle Profile Menu Bar
@@ -380,12 +552,14 @@ const profileMenu = document.getElementById("profile-menu");
 const dropDownToggleHandler = () => {
   notToggleBtn.style.backgroundColor = "";
   profileMenu.classList.toggle("hidden");
+  profileMenu.style.display = "flex";
   notMenu.classList.add("hidden");
 
   if (!profileMenu.classList.contains("hidden")) {
     profileToggleButton.style.backgroundColor = "#656266";
   } else {
     profileToggleButton.style.backgroundColor = "";
+    profileMenu.style.display = "none";
   }
 
   brOne.classList.remove("active-pmi");
@@ -427,6 +601,12 @@ cancel.addEventListener("click", () => {
   adBar.style.display = "none";
 });
 
+cancel.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    adBar.style.display = "none";
+  }
+});
+
 const progressBar = document.getElementById("progress-bar");
 const updateProgressBar = () => {
   const counterValue = parseInt(setupCounter.innerText);
@@ -445,9 +625,9 @@ notToggleBtn.addEventListener("keydown", function (event) {
   // Check if the pressed key is Enter (key code 13)
   if (event.key === "Enter") {
     // Trigger the click event
+    profileMenu.style.display = "none";
     profileToggleButton.style.backgroundColor = "";
     notMenu.classList.toggle("hidden");
-    profileMenu.classList.add("hidden");
 
     if (!notMenu.classList.contains("hidden")) {
       notToggleBtn.style.backgroundColor = "#656266";
@@ -458,9 +638,9 @@ notToggleBtn.addEventListener("keydown", function (event) {
 });
 
 notToggleBtn.addEventListener("click", () => {
+  profileMenu.style.display = "none";
   profileToggleButton.style.backgroundColor = "";
   notMenu.classList.toggle("hidden");
-  profileMenu.classList.add("hidden");
 
   if (!notMenu.classList.contains("hidden")) {
     notToggleBtn.style.backgroundColor = "#656266";
@@ -492,6 +672,8 @@ function toggleActive(element) {
   liTen.classList.remove("active-pmi");
 
   element.classList.toggle("active-pmi");
+  profileMenu.style.display = "none";
+  profileToggleButton.style.backgroundColor = "";
 }
 
 brOne.addEventListener("click", () => toggleActive(brOne));
