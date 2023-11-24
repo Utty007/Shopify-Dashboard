@@ -292,7 +292,7 @@ main {
   font-family: inherit;
 }
 
-#ad > div > p {
+#ad > div > h1 {
   color: #e3e3e3;
   font-size: 13px;
   line-height: 18px;
@@ -335,7 +335,7 @@ main {
   justify-content: space-between;
 }
 
-#sg-header-text > h2 {
+#sg-header-text > h1 {
   font-size: 16px;
   line-height: 20px;
   font-weight: 600;
@@ -476,7 +476,7 @@ main {
   /* max-width: 480px; */
 }
 
-.setup-text > h2 {
+.setup-text > h1 {
   /* font-size: 15px; */
   /* font-weight: 600; */
   line-height: 18px;
