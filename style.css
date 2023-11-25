@@ -86,6 +86,10 @@ header {
 }
 
 #notification-icon:focus {
+  outline: none;
+}
+
+#notification-icon:focus-visible {
   /* border-radius: 8px; */
   outline: 1px solid #005bd3;
 }
@@ -103,6 +107,7 @@ header {
   background-color: white;
   color: #303030;
   padding: 16px;
+  z-index: 10;
 }
 
 #alert-header {
@@ -123,11 +128,21 @@ header {
 }
 
 #filter:focus {
+  outline: none;
+  border-radius: 6px;
+}
+
+#filter:focus-visible {
   outline: 1px solid #005bd3;
   border-radius: 6px;
 }
 
 #mark:focus {
+  outline: none;
+  border-radius: 6px;
+}
+
+#mark:focus-visible {
   outline: 1px solid #005bd3;
   border-radius: 6px;
 }
@@ -149,6 +164,10 @@ header {
 }
 
 #profile:focus {
+  outline: none;
+}
+
+#profile:focus-visible {
   outline: 1px solid #005bd3;
 }
 
@@ -220,6 +239,10 @@ hr {
 }
 
 #all-s:focus {
+  outline: none;
+}
+
+#all-s:focus-visible {
   outline: 1px solid #005bd3;
 }
 
@@ -244,6 +267,16 @@ hr {
 #blue-br-five:focus,
 #yellow-br-two:focus,
 #yellow-br-three:focus {
+  outline: none;
+}
+
+#blue-br-one:focus-visible,
+#blue-br-two:focus-visible,
+#blue-br-three:focus-visible,
+#blue-br-four:focus-visible,
+#blue-br-five:focus-visible,
+#yellow-br-two:focus-visible,
+#yellow-br-three:focus-visible {
   outline: 1px solid #005bd3;
 }
 
@@ -314,10 +347,25 @@ main {
   line-height: 15px;
   font-weight: 600;
   font-family: inherit;
+  cursor: pointer;
+}
+
+#ad > span > button > a {
+  text-decoration: none;
+  color: inherit;
 }
 
 #cancel {
   cursor: pointer;
+}
+
+#cancel:focus {
+  outline: none;
+}
+
+#cancel:focus-visible {
+  outline: 1px solid #005bd3;
+  border-radius: 6px;
 }
 
 #setup-guide {
@@ -413,6 +461,10 @@ main {
 }
 
 #dropdownButton:focus {
+  outline: none;
+}
+
+#dropdownButton:focus-visible {
   outline: 1px solid #005bd3;
 }
 
@@ -436,15 +488,26 @@ main {
 #circleFive:focus {
   width: 23px;
   height: 21px;
+  outline: none;
+  padding: 2px 1px 1px 1px;
+}
+
+#circleOne:focus-visible,
+#circleTwo:focus-visible,
+#circleThree:focus-visible,
+#circleFour:focus-visible,
+#circleFive:focus-visible {
+  width: 23px;
+  height: 21px;
   outline: 1px solid #8a8a8a;
   padding: 2px 1px 1px 1px;
 }
 
-#setupOne:focus,
-#setupTwo:focus,
-#setupThree:focus,
-#setupFour:focus,
-#setupFive:focus {
+#setupOne:focus-visible,
+#setupTwo:focus-visible,
+#setupThree:focus-visible,
+#setupFour:focus-visible,
+#setupFive:focus-visible {
   background-color: #f0f0f0;
 }
 

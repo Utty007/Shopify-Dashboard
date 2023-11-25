@@ -141,12 +141,18 @@ const loadMarkOneToggle = () => {
 
 circleOne.addEventListener("click", () => {
   loadMarkOneToggle();
+  if (!mark2) {
+    handleSetupTwoToggle();
+  }
 });
 
 circleFocOne.addEventListener("keydown", (event) => {
   if (event.key === "Enter") {
     if (!mark1) {
       loadMarkOneToggle();
+      if (!mark2) {
+        handleSetupTwoToggle();
+      }
     } else {
       markOne.classList.add("hidden");
       circleOne.classList.remove("hidden");
@@ -229,6 +235,9 @@ circleTwo.addEventListener("click", () => {
     setupCounter.innerText = i;
   }, 500);
   mark2 = true;
+  if (!mark3) {
+    handleSetupThreeToggle();
+  }
 });
 
 circleFocTwo.addEventListener("keydown", (event) => {
@@ -243,6 +252,9 @@ circleFocTwo.addEventListener("keydown", (event) => {
         setupCounter.innerText = i;
       }, 500);
       mark2 = true;
+      if (!mark3) {
+        handleSetupThreeToggle();
+      }
     } else {
       markTwo.classList.add("hidden");
       circleTwo.classList.remove("hidden");
@@ -324,6 +336,9 @@ circleThree.addEventListener("click", () => {
     setupCounter.innerText = i;
   }, 500);
   mark3 = true;
+  if (!mark4) {
+    handleSetupFourToggle();
+  }
 });
 
 circleFocThree.addEventListener("keydown", (event) => {
@@ -338,6 +353,9 @@ circleFocThree.addEventListener("keydown", (event) => {
         setupCounter.innerText = i;
       }, 500);
       mark3 = true;
+      if (!mark4) {
+        handleSetupFourToggle();
+      }
     } else {
       markThree.classList.add("hidden");
       circleThree.classList.remove("hidden");
@@ -419,6 +437,9 @@ circleFour.addEventListener("click", () => {
     setupCounter.innerText = i;
   }, 500);
   mark4 = true;
+  if (!mark5) {
+    handleSetupFiveToggle();
+  }
 });
 
 circleFocFour.addEventListener("keydown", (event) => {
@@ -433,6 +454,9 @@ circleFocFour.addEventListener("keydown", (event) => {
         setupCounter.innerText = i;
       }, 500);
       mark4 = true;
+      if (!mark5) {
+        handleSetupFiveToggle();
+      }
     } else {
       markFour.classList.add("hidden");
       circleFour.classList.remove("hidden");
@@ -513,6 +537,9 @@ circleFive.addEventListener("click", () => {
     setupCounter.innerText = i;
   }, 500);
   mark5 = true;
+  if (!mark1) {
+    handleSetupOneToggle();
+  }
 });
 
 circleFocFive.addEventListener("keydown", (event) => {
@@ -527,6 +554,9 @@ circleFocFive.addEventListener("keydown", (event) => {
         setupCounter.innerText = i;
       }, 500);
       mark5 = true;
+      if (!mark1) {
+        handleSetupOneToggle();
+      }
     } else {
       markFive.classList.add("hidden");
       circleFive.classList.remove("hidden");
