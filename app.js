@@ -14,8 +14,10 @@ const openSetupDropdownHandler = () => {
   toggleOpen.classList.add("hidden");
   toggleClose.classList.remove("hidden");
   contentToToggle.classList.remove("hidden");
-
   dropDownOpen = true;
+
+  const isHidden = contentToToggle.classList.contains("hidden");
+  keyboardSetupToggle.setAttribute("aria-expanded", String(!isHidden));
 };
 
 toggleOpen.addEventListener("click", () => {
@@ -65,6 +67,8 @@ const closeSetupDropDownHandler = () => {
   btnToToggleFive.classList.add("hidden");
 
   dropDownOpen = false;
+  const isHidden = contentToToggle.classList.contains("hidden");
+  keyboardSetupToggle.setAttribute("aria-expanded", String(!isHidden));
 };
 
 toggleClose.addEventListener("click", () => {
@@ -85,7 +89,6 @@ const handleSetupOneToggle = () => {
   imageToToggleOne.classList.toggle("hidden");
   textToToggleOne.classList.toggle("hidden");
   btnToToggleOne.classList.toggle("hidden");
-  // toggleCompOne.classList.toggle("setup-p-bg");
   setupOne.classList.toggle("setup-p-bg");
 
   imageToToggleTwo.classList.add("hidden");
@@ -126,6 +129,7 @@ const loadingOne = document.getElementById("setup-sect-load-one");
 const markOne = document.getElementById("setup-sect-mark-one");
 
 let mark1 = false;
+
 const loadMarkOneToggle = () => {
   circleOne.classList.add("hidden");
   loadingOne.classList.remove("hidden");
@@ -134,25 +138,49 @@ const loadMarkOneToggle = () => {
     markOne.classList.remove("hidden");
     i = i + 1;
     setupCounter.innerText = i;
-    // i = setupCounter.innerText;
   }, 500);
   mark1 = true;
+  if (!mark2) {
+    showSetupTwo();
+  }
+};
+
+const showSetupTwo = () => {
+  imageToToggleTwo.classList.remove("hidden");
+  textToToggleTwo.classList.remove("hidden");
+  btnToToggleTwo.classList.remove("hidden");
+  btnToToggleSix.classList.remove("hidden");
+  setupTwo.classList.add("setup-p-bg");
+
+  imageToToggleOne.classList.add("hidden");
+  textToToggleOne.classList.add("hidden");
+  btnToToggleOne.classList.add("hidden");
+  setupOne.classList.remove("setup-p-bg");
+
+  imageToToggleThree.classList.add("hidden");
+  textToToggleThree.classList.add("hidden");
+  btnToToggleThree.classList.add("hidden");
+  setupThree.classList.remove("setup-p-bg");
+
+  imageToToggleFour.classList.add("hidden");
+  textToToggleFour.classList.add("hidden");
+  btnToToggleFour.classList.add("hidden");
+  setupFour.classList.remove("setup-p-bg");
+
+  imageToToggleFive.classList.add("hidden");
+  textToToggleFive.classList.add("hidden");
+  btnToToggleFive.classList.add("hidden");
+  setupFive.classList.remove("setup-p-bg");
 };
 
 circleOne.addEventListener("click", () => {
   loadMarkOneToggle();
-  if (!mark2) {
-    handleSetupTwoToggle();
-  }
 });
 
 circleFocOne.addEventListener("keydown", (event) => {
   if (event.key === "Enter") {
     if (!mark1) {
       loadMarkOneToggle();
-      if (!mark2) {
-        handleSetupTwoToggle();
-      }
     } else {
       markOne.classList.add("hidden");
       circleOne.classList.remove("hidden");
@@ -171,6 +199,19 @@ markOne.addEventListener("click", () => {
   mark1 = false;
   //   i = setupCounter.innerText;
 });
+
+const mutationOneCallback = (mutationsList) => {
+  for (const mutation of mutationsList) {
+    if (mutation.type === "attributes" && mutation.attributeName === "class") {
+      const containsHidden = textToToggleOne.classList.contains("hidden");
+      // Update aria-expanded attribute of setupOne based on the presence of 'hidden' class
+      setupOne.setAttribute("aria-expanded", String(!containsHidden));
+    }
+  }
+};
+const observerOne = new MutationObserver(mutationOneCallback);
+const observerConfigOne = { attributes: true, attributeFilter: ["class"] };
+observerOne.observe(textToToggleOne, observerConfigOne);
 
 // For Add your first product
 const imageToToggleTwo = document.getElementById("setup-sect-img-two");
@@ -225,6 +266,35 @@ const loadingTwo = document.getElementById("setup-sect-load-two");
 const markTwo = document.getElementById("setup-sect-mark-two");
 let mark2 = false;
 
+const showSetupThree = () => {
+  imageToToggleThree.classList.remove("hidden");
+  textToToggleThree.classList.remove("hidden");
+  btnToToggleThree.classList.remove("hidden");
+  setupThree.classList.add("setup-p-bg");
+
+  imageToToggleOne.classList.add("hidden");
+  textToToggleOne.classList.add("hidden");
+  btnToToggleOne.classList.add("hidden");
+  // toggleCompOne.classList.remove("setup-p-bg");
+  setupOne.classList.remove("setup-p-bg");
+
+  imageToToggleTwo.classList.add("hidden");
+  textToToggleTwo.classList.add("hidden");
+  btnToToggleTwo.classList.add("hidden");
+  btnToToggleSix.classList.add("hidden");
+  setupTwo.classList.remove("setup-p-bg");
+
+  imageToToggleFour.classList.add("hidden");
+  textToToggleFour.classList.add("hidden");
+  btnToToggleFour.classList.add("hidden");
+  setupFour.classList.remove("setup-p-bg");
+
+  imageToToggleFive.classList.add("hidden");
+  textToToggleFive.classList.add("hidden");
+  btnToToggleFive.classList.add("hidden");
+  setupFive.classList.remove("setup-p-bg");
+};
+
 circleTwo.addEventListener("click", () => {
   circleTwo.classList.add("hidden");
   loadingTwo.classList.remove("hidden");
@@ -236,7 +306,7 @@ circleTwo.addEventListener("click", () => {
   }, 500);
   mark2 = true;
   if (!mark3) {
-    handleSetupThreeToggle();
+    showSetupThree();
   }
 });
 
@@ -252,9 +322,6 @@ circleFocTwo.addEventListener("keydown", (event) => {
         setupCounter.innerText = i;
       }, 500);
       mark2 = true;
-      if (!mark3) {
-        handleSetupThreeToggle();
-      }
     } else {
       markTwo.classList.add("hidden");
       circleTwo.classList.remove("hidden");
@@ -273,6 +340,19 @@ markTwo.addEventListener("click", () => {
   mark2 = false;
 });
 
+const mutationTwoCallback = (mutationsList) => {
+  for (const mutation of mutationsList) {
+    if (mutation.type === "attributes" && mutation.attributeName === "class") {
+      const containsHidden = textToToggleTwo.classList.contains("hidden");
+      // Update aria-expanded attribute of setupOne based on the presence of 'hidden' class
+      setupTwo.setAttribute("aria-expanded", String(!containsHidden));
+    }
+  }
+};
+const observerTwo = new MutationObserver(mutationTwoCallback);
+const observerConfigTwo = { attributes: true, attributeFilter: ["class"] };
+observerTwo.observe(textToToggleTwo, observerConfigTwo);
+
 // For Add a custom domain
 const imageToToggleThree = document.getElementById("setup-sect-img-three");
 const textToToggleThree = document.getElementById("setup-sect-text-three");
@@ -289,7 +369,6 @@ const handleSetupThreeToggle = () => {
   imageToToggleOne.classList.add("hidden");
   textToToggleOne.classList.add("hidden");
   btnToToggleOne.classList.add("hidden");
-  // toggleCompOne.classList.remove("setup-p-bg");
   setupOne.classList.remove("setup-p-bg");
 
   imageToToggleTwo.classList.add("hidden");
@@ -326,6 +405,34 @@ const loadingThree = document.getElementById("setup-sect-load-three");
 const markThree = document.getElementById("setup-sect-mark-three");
 let mark3 = false;
 
+const showSetupFour = () => {
+  imageToToggleFour.classList.remove("hidden");
+  textToToggleFour.classList.remove("hidden");
+  btnToToggleFour.classList.remove("hidden");
+  setupFour.classList.add("setup-p-bg");
+
+  imageToToggleOne.classList.add("hidden");
+  textToToggleOne.classList.add("hidden");
+  btnToToggleOne.classList.add("hidden");
+  setupOne.classList.remove("setup-p-bg");
+
+  imageToToggleTwo.classList.add("hidden");
+  textToToggleTwo.classList.add("hidden");
+  btnToToggleTwo.classList.add("hidden");
+  btnToToggleSix.classList.add("hidden");
+  setupTwo.classList.remove("setup-p-bg");
+
+  imageToToggleThree.classList.add("hidden");
+  textToToggleThree.classList.add("hidden");
+  btnToToggleThree.classList.add("hidden");
+  setupThree.classList.remove("setup-p-bg");
+
+  imageToToggleFive.classList.add("hidden");
+  textToToggleFive.classList.add("hidden");
+  btnToToggleFive.classList.add("hidden");
+  setupFive.classList.remove("setup-p-bg");
+};
+
 circleThree.addEventListener("click", () => {
   circleThree.classList.add("hidden");
   loadingThree.classList.remove("hidden");
@@ -337,7 +444,9 @@ circleThree.addEventListener("click", () => {
   }, 500);
   mark3 = true;
   if (!mark4) {
-    handleSetupFourToggle();
+    showSetupFour();
+    const isHidden = textToToggleFour.classList.contains("hidden");
+    setupFour.setAttribute("aria-expanded", String(!isHidden));
   }
 });
 
@@ -353,9 +462,6 @@ circleFocThree.addEventListener("keydown", (event) => {
         setupCounter.innerText = i;
       }, 500);
       mark3 = true;
-      if (!mark4) {
-        handleSetupFourToggle();
-      }
     } else {
       markThree.classList.add("hidden");
       circleThree.classList.remove("hidden");
@@ -374,6 +480,19 @@ markThree.addEventListener("click", () => {
   mark3 = false;
 });
 
+const mutationThreeCallback = (mutationsList) => {
+  for (const mutation of mutationsList) {
+    if (mutation.type === "attributes" && mutation.attributeName === "class") {
+      const containsHidden = textToToggleThree.classList.contains("hidden");
+      // Update aria-expanded attribute of setupOne based on the presence of 'hidden' class
+      setupThree.setAttribute("aria-expanded", String(!containsHidden));
+    }
+  }
+};
+const observerThree = new MutationObserver(mutationThreeCallback);
+const observerConfigThree = { attributes: true, attributeFilter: ["class"] };
+observerThree.observe(textToToggleThree, observerConfigThree);
+
 // For Name your store
 const imageToToggleFour = document.getElementById("setup-sect-img-four");
 const textToToggleFour = document.getElementById("setup-sect-text-four");
@@ -390,7 +509,6 @@ const handleSetupFourToggle = () => {
   imageToToggleOne.classList.add("hidden");
   textToToggleOne.classList.add("hidden");
   btnToToggleOne.classList.add("hidden");
-  // toggleCompOne.classList.remove("setup-p-bg");
   setupOne.classList.remove("setup-p-bg");
 
   imageToToggleTwo.classList.add("hidden");
@@ -427,6 +545,34 @@ const loadingFour = document.getElementById("setup-sect-load-four");
 const markFour = document.getElementById("setup-sect-mark-four");
 let mark4 = false;
 
+const showSetupFive = () => {
+  imageToToggleFive.classList.remove("hidden");
+  textToToggleFive.classList.remove("hidden");
+  btnToToggleFive.classList.remove("hidden");
+  setupFive.classList.add("setup-p-bg");
+
+  imageToToggleTwo.classList.add("hidden");
+  textToToggleTwo.classList.add("hidden");
+  btnToToggleTwo.classList.add("hidden");
+  btnToToggleSix.classList.add("hidden");
+  setupTwo.classList.remove("setup-p-bg");
+
+  imageToToggleThree.classList.add("hidden");
+  textToToggleThree.classList.add("hidden");
+  btnToToggleThree.classList.add("hidden");
+  setupThree.classList.remove("setup-p-bg");
+
+  imageToToggleFour.classList.add("hidden");
+  textToToggleFour.classList.add("hidden");
+  btnToToggleFour.classList.add("hidden");
+  setupFour.classList.remove("setup-p-bg");
+
+  imageToToggleOne.classList.add("hidden");
+  textToToggleOne.classList.add("hidden");
+  btnToToggleOne.classList.add("hidden");
+  setupOne.classList.remove("setup-p-bg");
+};
+
 circleFour.addEventListener("click", () => {
   circleFour.classList.add("hidden");
   loadingFour.classList.remove("hidden");
@@ -438,7 +584,7 @@ circleFour.addEventListener("click", () => {
   }, 500);
   mark4 = true;
   if (!mark5) {
-    handleSetupFiveToggle();
+    showSetupFive();
   }
 });
 
@@ -454,9 +600,6 @@ circleFocFour.addEventListener("keydown", (event) => {
         setupCounter.innerText = i;
       }, 500);
       mark4 = true;
-      if (!mark5) {
-        handleSetupFiveToggle();
-      }
     } else {
       markFour.classList.add("hidden");
       circleFour.classList.remove("hidden");
@@ -473,6 +616,19 @@ markFour.addEventListener("click", () => {
   i = i - 1;
   setupCounter.innerText = i;
 });
+
+const mutationFourCallback = (mutationsList) => {
+  for (const mutation of mutationsList) {
+    if (mutation.type === "attributes" && mutation.attributeName === "class") {
+      const containsHidden = textToToggleFour.classList.contains("hidden");
+      // Update aria-expanded attribute of setupOne based on the presence of 'hidden' class
+      setupFour.setAttribute("aria-expanded", String(!containsHidden));
+    }
+  }
+};
+const observerFour = new MutationObserver(mutationFourCallback);
+const observerConfigFour = { attributes: true, attributeFilter: ["class"] };
+observerFour.observe(textToToggleFour, observerConfigFour);
 
 // For Add your first product
 const imageToToggleFive = document.getElementById("setup-sect-img-five");
@@ -506,8 +662,10 @@ const handleSetupFiveToggle = () => {
   imageToToggleOne.classList.add("hidden");
   textToToggleOne.classList.add("hidden");
   btnToToggleOne.classList.add("hidden");
-  // toggleCompOne.classList.remove("setup-p-bg");
   setupOne.classList.remove("setup-p-bg");
+
+  const isHidden = textToToggleFive.classList.contains("hidden");
+  setupFive.setAttribute("aria-expanded", String(!isHidden));
 };
 
 toggleCompFive.addEventListener("click", () => {
@@ -527,6 +685,34 @@ const loadingFive = document.getElementById("setup-sect-load-five");
 const markFive = document.getElementById("setup-sect-mark-five");
 let mark5 = false;
 
+const showSetupOne = () => {
+  imageToToggleOne.classList.remove("hidden");
+  textToToggleOne.classList.remove("hidden");
+  btnToToggleOne.classList.remove("hidden");
+  setupOne.classList.add("setup-p-bg");
+
+  imageToToggleTwo.classList.add("hidden");
+  textToToggleTwo.classList.add("hidden");
+  btnToToggleTwo.classList.add("hidden");
+  btnToToggleSix.classList.add("hidden");
+  setupTwo.classList.remove("setup-p-bg");
+
+  imageToToggleThree.classList.add("hidden");
+  textToToggleThree.classList.add("hidden");
+  btnToToggleThree.classList.add("hidden");
+  setupThree.classList.remove("setup-p-bg");
+
+  imageToToggleFour.classList.add("hidden");
+  textToToggleFour.classList.add("hidden");
+  btnToToggleFour.classList.add("hidden");
+  setupFour.classList.remove("setup-p-bg");
+
+  imageToToggleFive.classList.add("hidden");
+  textToToggleFive.classList.add("hidden");
+  btnToToggleFive.classList.add("hidden");
+  setupFive.classList.remove("setup-p-bg");
+};
+
 circleFive.addEventListener("click", () => {
   circleFive.classList.add("hidden");
   loadingFive.classList.remove("hidden");
@@ -538,7 +724,9 @@ circleFive.addEventListener("click", () => {
   }, 500);
   mark5 = true;
   if (!mark1) {
-    handleSetupOneToggle();
+    showSetupOne();
+    const isHidden = textToToggleOne.classList.contains("hidden");
+    setupOne.setAttribute("aria-expanded", String(!isHidden));
   }
 });
 
@@ -554,9 +742,6 @@ circleFocFive.addEventListener("keydown", (event) => {
         setupCounter.innerText = i;
       }, 500);
       mark5 = true;
-      if (!mark1) {
-        handleSetupOneToggle();
-      }
     } else {
       markFive.classList.add("hidden");
       circleFive.classList.remove("hidden");
@@ -575,6 +760,19 @@ markFive.addEventListener("click", () => {
   mark5 = false;
 });
 
+const mutationFiveCallback = (mutationsList) => {
+  for (const mutation of mutationsList) {
+    if (mutation.type === "attributes" && mutation.attributeName === "class") {
+      const containsHidden = textToToggleFive.classList.contains("hidden");
+      // Update aria-expanded attribute of setupOne based on the presence of 'hidden' class
+      setupFive.setAttribute("aria-expanded", String(!containsHidden));
+    }
+  }
+};
+const observerFive = new MutationObserver(mutationFiveCallback);
+const observerConfigFive = { attributes: true, attributeFilter: ["class"] };
+observerFive.observe(textToToggleFive, observerConfigFive);
+
 //Toggle Profile Menu Bar
 const profileToggleButton = document.getElementById("profile");
 const profileMenu = document.getElementById("profile-menu");
@@ -584,6 +782,10 @@ const dropDownToggleHandler = () => {
   profileMenu.classList.toggle("hidden");
   profileMenu.style.display = "flex";
   notMenu.classList.add("hidden");
+
+  // Update aria-expanded attribute
+  const isHidden = profileMenu.classList.contains("hidden");
+  profileToggleButton.setAttribute("aria-expanded", String(!isHidden));
 
   if (!profileMenu.classList.contains("hidden")) {
     profileToggleButton.style.backgroundColor = "#656266";
@@ -611,18 +813,6 @@ profileToggleButton.addEventListener("keydown", (event) => {
   }
 });
 
-// Add event listeners to make menu items toggleable on Enter keypress
-const menuItems = profileMenu.querySelectorAll('[role="menuitem"]');
-
-menuItems.forEach((menuItem) => {
-  menuItem.addEventListener("keydown", (event) => {
-    if (event.key === "Enter") {
-      // Toggle the state or perform any other action
-      console.log(`Item ${menuItem.id} clicked on Enter`);
-    }
-  });
-});
-
 //Hide ad bar
 const adBar = document.getElementById("ad");
 const cancel = document.getElementById("cancel");
@@ -638,14 +828,27 @@ cancel.addEventListener("keydown", (event) => {
 });
 
 const progressBar = document.getElementById("progress-bar");
+
 const updateProgressBar = () => {
   const counterValue = parseInt(setupCounter.innerText);
   const maxWidth = 5; // Set your desired maximum width
   const percentage = (counterValue / maxWidth) * 100;
   progressBar.style.width = percentage + "%";
+  document
+    .getElementById("progress")
+    .setAttribute("aria-valuenow", counterValue); // Update aria-valuenow
 };
+
 updateProgressBar();
-setupCounter.addEventListener("DOMSubtreeModified", updateProgressBar);
+
+// Use MutationObserver to detect changes in setupCounter
+const observer = new MutationObserver(updateProgressBar);
+observer.observe(setupCounter, { childList: true, subtree: true });
+
+// Example of how to trigger the update manually (if needed)
+// setupCounter.innerText = "2";
+// observer.disconnect(); // Optional: disconnect the observer if you manually update the counter
+// updateProgressBar();
 
 //Toggle Notification menu
 const notToggleBtn = document.getElementById("notification-icon");
@@ -654,29 +857,30 @@ const notMenu = document.getElementById("notification-box");
 notToggleBtn.addEventListener("keydown", function (event) {
   // Check if the pressed key is Enter (key code 13)
   if (event.key === "Enter") {
-    // Trigger the click event
+    // Toggle the hidden state
     profileMenu.style.display = "none";
     profileToggleButton.style.backgroundColor = "";
-    notMenu.classList.toggle("hidden");
+    const isHidden = notMenu.classList.toggle("hidden");
 
-    if (!notMenu.classList.contains("hidden")) {
-      notToggleBtn.style.backgroundColor = "#656266";
-    } else {
-      notToggleBtn.style.backgroundColor = "";
-    }
+    // Update aria-expanded attribute
+    notToggleBtn.setAttribute("aria-expanded", String(!isHidden));
+
+    // Update background color based on visibility
+    notToggleBtn.style.backgroundColor = isHidden ? "" : "#656266";
   }
 });
 
 notToggleBtn.addEventListener("click", () => {
+  // Toggle the hidden state
   profileMenu.style.display = "none";
   profileToggleButton.style.backgroundColor = "";
-  notMenu.classList.toggle("hidden");
+  const isHidden = notMenu.classList.toggle("hidden");
 
-  if (!notMenu.classList.contains("hidden")) {
-    notToggleBtn.style.backgroundColor = "#656266";
-  } else {
-    notToggleBtn.style.backgroundColor = "";
-  }
+  // Update aria-expanded attribute
+  notToggleBtn.setAttribute("aria-expanded", String(!isHidden));
+
+  // Update background color based on visibility
+  notToggleBtn.style.backgroundColor = isHidden ? "" : "#656266";
 });
 
 // Handling click for Profile menu items

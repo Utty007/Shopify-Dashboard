@@ -19,6 +19,14 @@ header {
   background-color: black;
 }
 
+header > a:focus {
+  outline: none;
+}
+
+header > a:focus-visible {
+  outline: 1px solid #005bd3;
+}
+
 #mobileShopifyIcon {
   display: none;
 }
@@ -479,6 +487,7 @@ main {
   padding: 12px;
   cursor: pointer;
   border-radius: 6px;
+  gap: 8px;
 }
 
 #circleOne:focus,
@@ -486,10 +495,7 @@ main {
 #circleThree:focus,
 #circleFour:focus,
 #circleFive:focus {
-  width: 23px;
-  height: 21px;
   outline: none;
-  padding: 2px 1px 1px 1px;
 }
 
 #circleOne:focus-visible,
@@ -497,10 +503,9 @@ main {
 #circleThree:focus-visible,
 #circleFour:focus-visible,
 #circleFive:focus-visible {
-  width: 23px;
-  height: 21px;
-  outline: 1px solid #8a8a8a;
-  padding: 2px 1px 1px 1px;
+  height: 20px;
+  outline: 1px solid #005bd3;
+  padding: 2px;
 }
 
 #setupOne:focus-visible,
@@ -509,6 +514,7 @@ main {
 #setupFour:focus-visible,
 #setupFive:focus-visible {
   background-color: #f0f0f0;
+  outline: 1px solid #005bd3;
 }
 
 .setup:hover {
@@ -540,22 +546,17 @@ main {
 }
 
 .setup-text > h1 {
-  /* font-size: 15px; */
-  /* font-weight: 600; */
   line-height: 18px;
   display: flex;
   align-items: center;
   margin-top: 0;
   gap: 6px;
-
+  margin-bottom: 0;
   color: #303030;
-
-  /* Text-13/medium */
   font-family: Inter;
   font-size: 13px;
   font-style: normal;
   font-weight: 600;
-  /* line-height: 140%; 18.2px */
 }
 
 .setup-text > p {
